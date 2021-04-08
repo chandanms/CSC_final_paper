@@ -126,31 +126,29 @@ for name, model in models:
 
 ## Entropy accuracy
 
-# entropy_accuracy_score = 0
-#
-# for x in range(0, len(X_test)):
-#
-#     model_predictions = []
-#
-#     for name, model in models:
-#         model_predictions.append(model.predict_proba(X_test[x].reshape(1, -1))[0])
-#
-#     entropy_result = cross_entropy_total(model_predictions)
-#
-#     entropy_result_arg = np.argmin(entropy_result)
-#
-#     entropy_result_prediction = (models[entropy_result_arg][1]).predict(X_test[x].reshape(1, -1))[0]
-#
-#     print (entropy_result_prediction)
-#
-#     if (entropy_result_prediction == y_test[x]):
-#         entropy_accuracy_score = entropy_accuracy_score + 1
-#
-# entropy_total_accuracy = entropy_accuracy_score/len(X_test)
-#
-# print ("Score of Entropy method: ", entropy_total_accuracy)
+entropy_accuracy_score = 0
 
-# Plurality score
+for x in range(0, len(X_test)):
+
+    model_predictions = []
+
+    for name, model in models:
+        model_predictions.append(model.predict_proba(X_test[x].reshape(1, -1))[0])
+
+    entropy_result = cross_entropy_total(model_predictions)
+
+    entropy_result_arg = np.argmin(entropy_result)
+
+    entropy_result_prediction = (models[entropy_result_arg][1]).predict(X_test[x].reshape(1, -1))[0]
+
+    if (entropy_result_prediction == y_test[x]):
+        entropy_accuracy_score = entropy_accuracy_score + 1
+
+entropy_total_accuracy = entropy_accuracy_score/len(X_test)
+
+print ("Score of Entropy method: ", entropy_total_accuracy)
+
+#Plurality score
 
 plurality_accuracy_score = 0
 
@@ -163,8 +161,6 @@ for x in range(0, len(X_test)):
     plurality_result = plurality(model_predictions)
 
     plurality_prediction = np.argmax(plurality_result)
-
-    print (plurality_prediction, y_test[x])
 
     if (plurality_prediction == y_test[x]):
         plurality_accuracy_score = plurality_accuracy_score + 1
